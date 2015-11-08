@@ -1,0 +1,15 @@
+-cp ..\Sources
+-cp C:\HaxeToolkit\haxe\lib\kha\15,10,0\Sources
+-cp C:\HaxeToolkit\haxe\lib\kha\15,10,0\Backends\Flash
+-D swf-script-timeout=60
+-D sys_flash
+-D sys_g1
+-D sys_g2
+-D sys_g3
+-D sys_g4
+-D sys_a1
+-D sys_a2
+-D kha
+-swf flash\kha.swf
+-swf-version 16.0
+-main Main

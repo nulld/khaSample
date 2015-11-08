@@ -1,0 +1,10 @@
+{
+	"varnames": {
+		"fragmentColor": "v0",
+		"tex": "fs0",
+		"texCoord": "v1"
+	},
+	"consts": {
+	},
+	"agalasm": "mov ft0, v0\nmov ft1, ft0\nmov ft1.xyz, ft0.xyz\nmov ft2, v1\ntex ft3, ft2, fs0 <2d, wrap, linear>\nmov ft4, ft3.xxxx\nmov ft5, v0\nmov ft6, ft5.wwww\nmul ft7, ft4, ft6\nmov ft8, ft1.xxxx\nmov ft9, ft1.yyyy\nmov ft10, ft1.zzzz\nmov ft11.x, ft8.x\nmov ft11.y, ft9.y\nmov ft11.z, ft10.z\nmov ft11.w, ft7.w\nmov oc, ft11\n"
+}

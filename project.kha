@@ -1,0 +1,26 @@
+{
+	"format": 3,
+	"game": {
+		"name": "Empty",
+		"width": 640,
+		"height": 480,
+		"antiAliasingSamples": 2
+	},
+	"assets": [
+		{
+			"type": "blob",
+			"file": "Arial14.kravur",
+			"name": "Arial14.kravur"
+		}
+	],
+	"rooms": [
+		{
+			"name": "test",
+			"parent": null,
+			"neighbours": [],
+			"assets": [
+				"Arial14.kravur"
+			]
+		}
+	]
+}

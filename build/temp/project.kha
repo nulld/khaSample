@@ -1,0 +1,90 @@
+{
+	"format": 3,
+	"game": {
+		"name": "Empty",
+		"width": 640,
+		"height": 480,
+		"antiAliasingSamples": 2
+	},
+	"assets": [
+		{
+			"type": "blob",
+			"name": "Arial14.kravur",
+			"files": [
+				"Arial14.kravur"
+			]
+		}
+	],
+	"rooms": [
+		{
+			"name": "test",
+			"parent": null,
+			"neighbours": [],
+			"assets": [
+				"Arial14.kravur"
+			]
+		}
+	],
+	"shaders": [
+		{
+			"files": [
+				"cube.frag.agal"
+			],
+			"name": "cube.frag"
+		},
+		{
+			"files": [
+				"cube.vert.agal"
+			],
+			"name": "cube.vert"
+		},
+		{
+			"files": [
+				"painter-colored.frag.agal"
+			],
+			"name": "painter-colored.frag"
+		},
+		{
+			"files": [
+				"painter-colored.vert.agal"
+			],
+			"name": "painter-colored.vert"
+		},
+		{
+			"files": [
+				"painter-image.frag.agal"
+			],
+			"name": "painter-image.frag"
+		},
+		{
+			"files": [
+				"painter-image.vert.agal"
+			],
+			"name": "painter-image.vert"
+		},
+		{
+			"files": [
+				"painter-text.frag.agal"
+			],
+			"name": "painter-text.frag"
+		},
+		{
+			"files": [
+				"painter-text.vert.agal"
+			],
+			"name": "painter-text.vert"
+		},
+		{
+			"files": [
+				"painter-video.frag.agal"
+			],
+			"name": "painter-video.frag"
+		},
+		{
+			"files": [
+				"painter-video.vert.agal"
+			],
+			"name": "painter-video.vert"
+		}
+	]
+}

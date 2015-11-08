@@ -1,0 +1,16 @@
+{
+	"varnames": {
+		"gl_Position": "vt10",
+		"projectionMatrix": "vc2",
+		"vertexPosition": "va0",
+		"texCoord": "v1",
+		"texPosition": "va1",
+		"fragmentColor": "v0",
+		"vertexColor": "va2"
+	},
+	"consts": {
+		"vc0": [0.5, 0.5, 0.5, 0.5],
+		"vc1": [1.0, 1.0, 1.0, 1.0]
+	},
+	"agalasm": "mov vt0, vc2\nmov vt1, vc3\nmov vt2, vc4\nmov vt3, vc5\nmov vt4, va0\nmov vt5, vt4.xxxx\nmov vt6, vt4.yyyy\nmov vt7, vt4.zzzz\nmov vt8.x, vt5.x\nmov vt8.y, vt6.y\nmov vt8.z, vt7.z\nmov vt8.w, vc1.w\nm44 vt9, vt8, vt0\nmov vt10, vt9\nmov vt11, va1\nmov v1, vt11\nmov vt12, va2\nmov v0, vt12\nadd vt13.xxxx, vt10.zzzz, vt10.wwww\nmul vt10.z, vc0.x, vt13.x\nmov op, vt10\n"
+}
