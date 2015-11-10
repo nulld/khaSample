@@ -6,6 +6,7 @@ import kha.graphics4.Graphics;
 import kha.math.Matrix4;
 import kha.math.Vector3;
 import kha.math.Vector4;
+import kha.ScreenCanvas;
 
 /**
  * ...
@@ -77,10 +78,11 @@ class LocationRender
 		
 		trace( 'pos.x = ${pos.x}, pos.y = ${pos.y}, pos.z = ${pos.z} ');
 		
-		var w = Sys.
+		var w = ScreenCanvas.the.width;
+		var h = ScreenCanvas.the.height;
 		
-		var nmx = (mouseX/640) * 2.0 - 1.0;
-		var nmy = -(mouseY / 480) * 2.0 + 1.0;
+		var nmx = (mouseX/w) * 2.0 - 1.0;
+		var nmy = -(mouseY /h) * 2.0 + 1.0;
 		
 		//trace( 'x: $nmx, y: $nmy' );
 		
@@ -92,9 +94,20 @@ class LocationRender
 		vp = vp.multmat( p );
 		vp = vp.multmat( v );
 
-		var vpInv = vp.inverse();
-		var pp = new Vector4( nmx, nmy, 0.0, 1.0 );
-		pp = vpInv.multvec( pp );
+		var pInv = p.inverse();
+		var vInv = v.inverse();
+		
+		//nmx = 0;
+		//nmy = 0;
+		
+		var pp = new Vector4( nmx, nmy, 0.0, 0.0 );		
+		pp = pInv.multvec( pp );
+		trace( 'persp inverse: x: ${pp.x}, y: ${pp.y}, z: ${pp.z}, w: ${pp.w}' );
+
+		pp = vInv.multvec( pp );
+		
+		
+		
 		trace( 'x: ${pp.x}, y: ${pp.y}, z: ${pp.z}' );
 		
 	}
@@ -103,6 +116,7 @@ class LocationRender
 	
 	public function render(g:Graphics)
 	{
+		return;
 		// Begin rendering
         g.begin();
 
