@@ -41,9 +41,9 @@ class LocationRender
 		mvpID = cube.program.getConstantLocation("MVP");
 		colorID = cube.program.getConstantLocation("uColor");
 		
-		var fovY = 45;
-		var zn = 0.1;
-		var zf = 100;
+		var fovY = 90;
+		var zn = 1;
+		var zf = 10;
 		var aspect = 1.0;
 		
 		p = Matrix4.perspectiveProjection(fovY, aspect, zn, zf);
@@ -68,15 +68,20 @@ class LocationRender
     	mouseY = y;
     }
 	
+	public function traceVector4(vec: Vector4, name: String): Void
+	{
+		trace('$name:  ${vec.x}, ${vec.y}, ${vec.z}, ${vec.w}');
+	}
+	
 	public function update(dt:Float)
 	{
-		var pos = new Vector3(0, 4, 4);
+		var pos = new Vector3(4, 4, 4);
 		v = Matrix4.lookAt( pos, // Position in World Space
 						    new Vector3(0,0,0), // and looks at the origin
 					        new Vector3(0, 1, 0) // Head is up
 		);
 		
-		trace( 'pos.x = ${pos.x}, pos.y = ${pos.y}, pos.z = ${pos.z} ');
+		//trace( 'pos.x = ${pos.x}, pos.y = ${pos.y}, pos.z = ${pos.z} ');
 		
 		var w = ScreenCanvas.the.width;
 		var h = ScreenCanvas.the.height;
@@ -84,8 +89,15 @@ class LocationRender
 		var nmx = (mouseX/w) * 2.0 - 1.0;
 		var nmy = -(mouseY /h) * 2.0 + 1.0;
 		
-		//trace( 'x: $nmx, y: $nmy' );
+		var vec = new Vector4(2, -2, -5, 1);
+		var persp_vec = p.multvec(vec);
 		
+		var clip_space_point: Vector4 = new Vector4(nmx, nmy, 1.0, 1);
+		
+		var pInv = p.inverse();
+		
+		var eye_space_point = pInv.multvec(clip_space_point);
+		var norm_eye_space_point = eye_space_point.mult(1 / eye_space_point.w);
 		
 		var dir    = new Vector4( 0, -10, -10, 1);
 		dir.normalize();
@@ -94,29 +106,36 @@ class LocationRender
 		vp = vp.multmat( p );
 		vp = vp.multmat( v );
 
-		var pInv = p.inverse();
+		
 		var vInv = v.inverse();
 		
-		//nmx = 0;
-		//nmy = 0;
-		
-		var pp = new Vector4( nmx, nmy, 0.0, 0.0 );		
-		pp = pInv.multvec( pp );
-		trace( 'persp inverse: x: ${pp.x}, y: ${pp.y}, z: ${pp.z}, w: ${pp.w}' );
-
-		pp = vInv.multvec( pp );
+		var eye_space_dir = new Vector4();
+		eye_space_dir.x = norm_eye_space_point.x;
+		eye_space_dir.y = norm_eye_space_point.y;
+		eye_space_dir.z = norm_eye_space_point.z;
+		eye_space_dir.w = 0;
 		
 		
+		var world_space_dir = vInv.multvec(eye_space_dir);
+		world_space_dir.normalize();
 		
-		trace( 'x: ${pp.x}, y: ${pp.y}, z: ${pp.z}' );
+		var intersect_point = new Vector4();
 		
+		intersect_point.x = -(world_space_dir.x / world_space_dir.y) * pos.y + pos.x;
+		intersect_point.y = 0;
+		intersect_point.z = -(world_space_dir.z / world_space_dir.y) * pos.y + pos.z;
+		intersect_point.w = 1;
+		
+		ix = intersect_point.x;
+		iz = intersect_point.z;
 	}
 	
-	
+	var ix: Float;
+	var iz: Float;
 	
 	public function render(g:Graphics)
 	{
-		return;
+		//return;
 		// Begin rendering
         g.begin();
 
@@ -125,7 +144,7 @@ class LocationRender
 		g.setProgram( cube.program );
 		
 		var model = Matrix4.identity();
-		model = model.multmat( Matrix4.translation( 0.5, 0.5, 0.5));
+		model = model.multmat( Matrix4.translation( 0.5 + ix, 0.5, 0.5 + iz));
 		var mvp = vp.multmat( model );
 		g.setMatrix( mvpID, mvp );
 		g.setFloat4( colorID, 1.0, 0, 0, 1.0 );

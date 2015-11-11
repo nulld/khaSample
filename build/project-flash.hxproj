@@ -27,7 +27,7 @@
     <option noInlineOnDebug="False" />
     <option mainClass="Main" />
     <option enabledebug="True" />
-    <option additional="-D swf-script-timeout=60&#xA;-D sys_flash&#xA;-D sys_g1&#xA;-D sys_g2&#xA;-D sys_g3&#xA;-D sys_g4&#xA;-D sys_a1&#xA;-D sys_a2&#xA;-D kha&#xA;" />
+    <option additional="-D swf-script-timeout=60&#xA;-D sys_flash&#xA;-D sys_g1&#xA;-D sys_g2&#xA;-D sys_g3&#xA;-D sys_g4&#xA;-D sys_a1&#xA;-D sys_a2&#xA;-D kha&#xA;-D wmode=direct" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
@@ -43,7 +43,7 @@
   </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
-    <!-- example: <hidden path="..." /> -->
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
